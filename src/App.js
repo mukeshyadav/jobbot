@@ -9,6 +9,7 @@ import Posts from './containers/Posts'
 import Comments from './containers/Comments'
 
 class App extends Component {
+
   render () {
     return (
       <JobBotProvider>

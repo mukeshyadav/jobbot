@@ -1,15 +1,35 @@
-import React from 'react'
-import { Row, Col } from 'reactstrap'
-import Post from '../../components/Post'
+import React, { Component } from "react";
+import { Row, Col, Button } from "reactstrap";
 
-const Posts = () => {
-  return (
-    <Row>
+import JobBotContext from "../../store.js";
+import Post from "../../components/Post";
+
+export default class Posts extends Component {
+  createPostList = posts => {
+    debugger;
+    return posts.map(col => (
       <Col>
-      <Post />
+        <Post {...col} />
       </Col>
-    </Row>
-  )
-}
+    ));
+  };
+  render() {
+    return (
+      <JobBotContext.Consumer>
+        {ctx => (
+          <React.Fragment>
+            <Row>{this.createPostList(ctx.posts)}</Row>
 
-export default Posts
+            <Row>
+              <Col>
+                <Button onClick={ctx.getPosts} color="link">
+                  Load More
+                </Button>
+              </Col>
+            </Row>
+          </React.Fragment>
+        )}
+      </JobBotContext.Consumer>
+    );
+  }
+}

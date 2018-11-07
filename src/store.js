@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { getPosts, getComments } from "./services.js";
 
 const JobBotContext = React.createContext();
 
@@ -12,7 +13,13 @@ class JobBotProvider extends Component {
     };
   }
 
-  getPosts = () => {};
+  getPosts = data => {
+    getPosts(data).then(resData => {
+      this.setState({
+        posts: this.state.posts.push(resData)
+      });
+    });
+  };
 
   getComments = () => {};
 
