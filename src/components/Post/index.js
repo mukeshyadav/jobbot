@@ -1,18 +1,15 @@
 import React from 'react'
 import { Card, CardBody, CardTitle, CardText } from 'reactstrap'
 
-const Post = () => {
+const Post = (props) => {
   return (
     <Card>
       <CardBody>
-        <CardTitle tag='a' href='/post/1/comment'>
-          This is test Title
+        <CardTitle tag='a' href={`/post/${props.id}`}>
+          {props.title}
         </CardTitle>
         <CardText>
-          This is test card body to show content on the page
-        </CardText>
-        <CardText>
-          <small className='text-muted'>Date: 12/10/2018</small>
+          {props && props.isLink ? `${props.body}` : (props.body && props.body.length > 100 ? `${props.body.substring(0,100)}...` : `${props.body}`)}
         </CardText>
       </CardBody>
     </Card>

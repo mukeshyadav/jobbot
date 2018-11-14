@@ -1,10 +1,11 @@
 import React from 'react'
 import { ListGroupItem } from 'reactstrap'
 
-const Comment = () => {
+const Comment = (props) => {
+  console.log(props)
   return (
     <ListGroupItem>
-      Test Comments
+      {props.body}
     </ListGroupItem>
   )
 }

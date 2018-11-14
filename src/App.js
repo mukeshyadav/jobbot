@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import './App.css'
 
 import { Container } from 'reactstrap'
 import { JobBotProvider } from './store.js'
@@ -18,7 +17,7 @@ class App extends Component {
             <Header />
             <Container>
               <Route exact path='/' component={Posts} />
-              <Route path='/post/:id/comment' component={Comments} />
+              <Route path='/post/:id' component={Comments} />
             </Container>
           </React.Fragment>
         </Router>

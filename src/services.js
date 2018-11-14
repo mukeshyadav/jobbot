@@ -9,8 +9,9 @@ const getPosts = (params) => {
     .then(responseJSON => responseJSON)
 }
 
-const getComments = () => {
-  return fetch(`${API}/comments`)
+const getComments = (params) => {
+  const {id, page} = params ? params : {id: 1, page: 1}
+  return fetch(`${API}/posts/${id}/comments?_page=${page}&_limit=${commentLimit}`)
     .then(response => response.json())
     .then(responseJSON => responseJSON)
 }
@@ -21,4 +22,11 @@ const addComment = () => {
     .then(responseJSON => responseJSON)
 }
 
-export { getPosts, getComments, addComment }
+const getArrayData = (arr, obj) => {
+  for (let key in obj) {
+    arr.push(obj[key])
+  }
+  return arr
+}
+
+export { getPosts, getComments, addComment, getArrayData }

@@ -5,24 +5,34 @@ import JobBotContext from "../../store.js";
 import Post from "../../components/Post";
 
 export default class Posts extends Component {
+  state = {
+    count: 1
+  };
   createPostList = posts => {
-    debugger;
-    return posts.map(col => (
-      <Col>
+    return posts.map((col, index) => (
+      <Col key={index} sm={4}>
         <Post {...col} />
       </Col>
     ));
   };
+
+  getMorePost = funcPosts => {
+    this.setState({ ...this.state, count: this.state.count + 1 });
+    funcPosts({ page: this.state.count });
+  };
+
   render() {
     return (
       <JobBotContext.Consumer>
         {ctx => (
           <React.Fragment>
-            <Row>{this.createPostList(ctx.posts)}</Row>
-
+            <Row className="flex-div">{this.createPostList(ctx.posts)}</Row>
             <Row>
-              <Col>
-                <Button onClick={ctx.getPosts} color="link">
+              <Col xs={12}>
+                <Button
+                  onClick={() => this.getMorePost(ctx.getPosts)}
+                  color="link"
+                >
                   Load More
                 </Button>
               </Col>

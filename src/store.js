@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getPosts, getComments } from "./services.js";
+import { getPosts, getComments, getArrayData } from "./services.js";
 
 const JobBotContext = React.createContext();
 
@@ -15,15 +15,27 @@ class JobBotProvider extends Component {
 
   getPosts = data => {
     getPosts(data).then(resData => {
+      const posts = getArrayData(this.state.posts, resData);
       this.setState({
-        posts: this.state.posts.push(resData)
+        posts: posts
       });
     });
   };
 
-  getComments = () => {};
+  getComments = params => {
+    getComments(params).then(resData => {
+      const comments = getArrayData(this.state.comments, resData);
+      this.setState({
+        comments: comments
+      });
+    });
+  };
 
   addComment = () => {};
+
+  componentDidMount = () => {
+    this.getPosts();
+  };
 
   render() {
     return (
