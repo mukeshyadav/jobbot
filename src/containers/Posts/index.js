@@ -29,12 +29,18 @@ export default class Posts extends Component {
             <Row className="flex-div">{this.createPostList(ctx.posts)}</Row>
             <Row>
               <Col xs={12}>
-                <Button
-                  onClick={() => this.getMorePost(ctx.getPosts)}
-                  color="link"
-                >
-                  Load More
-                </Button>
+                {ctx.hasMorePosts ? (
+                  <Button
+                    onClick={() => this.getMorePost(ctx.getPosts)}
+                    color="link"
+                  >
+                    Load More
+                  </Button>
+                ) : (
+                  <Button color="danger" className="no-click">
+                    No More Posts Available
+                  </Button>
+                )}
               </Col>
             </Row>
           </React.Fragment>

@@ -40,12 +40,18 @@ export default class Comments extends Component {
             <Col sm={7}>
               <ListGroup flush>
                 {this.createCommentList(ctx.comments)}
-                <Button
-                  color="link"
-                  onClick={() => this.getMoreComments(ctx.getComments)}
-                >
-                  Load More
-                </Button>
+                {ctx.hasMoreComments ? (
+                  <Button
+                    color="link"
+                    onClick={() => this.getMoreComments(ctx.getComments)}
+                  >
+                    Load More
+                  </Button>
+                ) : (
+                  <Button color="danger" className="no-click">
+                    No More Comments Available for this Post
+                  </Button>
+                )}
               </ListGroup>
             </Col>
           </Row>

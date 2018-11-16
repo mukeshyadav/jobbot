@@ -9,17 +9,23 @@ class JobBotProvider extends Component {
     this.state = {
       posts: [],
       comments: [],
-      isLoader: true
+      isLoader: true,
+      hasMorePosts: true,
+      hasMoreComments: true
     };
   }
 
   getPosts = data => {
     this.setLoaderState(true);
     getPosts(data).then(resData => {
-      const posts = getArrayData(this.state.posts, resData);
-      this.setState({
-        posts: posts
-      });
+      if (resData.length > 0) {
+        const posts = getArrayData(this.state.posts, resData);
+        this.setState({
+          posts: posts
+        });
+      } else {
+        this.setState({ hasMorePosts: false });
+      }
       this.setLoaderState(false);
     });
   };
@@ -27,10 +33,14 @@ class JobBotProvider extends Component {
   getComments = params => {
     this.setLoaderState(true);
     getComments(params).then(resData => {
-      const comments = getArrayData(this.state.comments, resData);
-      this.setState({
-        comments: comments
-      });
+      if (resData.length > 0) {
+        const comments = getArrayData(this.state.comments, resData);
+        this.setState({
+          comments: comments
+        });
+      } else {
+        this.setState({ hasMoreComments: false });
+      }
       this.setLoaderState(false);
     });
   };

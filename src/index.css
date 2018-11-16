@@ -52,6 +52,10 @@ code {
   z-index: 9;
 }
 
+.no-click {
+  pointer-events: none;
+}
+
 .lds-ellipsis {
   display: inline-block;
   position: relative;
