@@ -14,21 +14,29 @@ class JobBotProvider extends Component {
   }
 
   getPosts = data => {
+    this.setLoaderState(true);
     getPosts(data).then(resData => {
       const posts = getArrayData(this.state.posts, resData);
       this.setState({
         posts: posts
       });
+      this.setLoaderState(false);
     });
   };
 
   getComments = params => {
+    this.setLoaderState(true);
     getComments(params).then(resData => {
       const comments = getArrayData(this.state.comments, resData);
       this.setState({
         comments: comments
       });
+      this.setLoaderState(false);
     });
+  };
+
+  setLoaderState = boolValLoader => {
+    this.setState({ isLoader: boolValLoader });
   };
 
   addComment = () => {};

@@ -31,7 +31,7 @@ export default class Comments extends Component {
       <JobBotContext.Consumer>
         {ctx => (
           <Row className="flex-div">
-            <Col sm={5}>
+            <Col sm={5} className="card-without-link">
               <Post
                 {...ctx.posts[this.props.match.params.id - 1]}
                 isLink={true}
